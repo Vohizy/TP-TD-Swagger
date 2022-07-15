@@ -1,0 +1,325 @@
+openapi: '3.0.2'
+info:
+  title: Student STD21005
+  description: HELLO WORD
+  version: '1.0.0'
+servers:
+  - url: https://STD21005.com
+paths:
+  /Student:
+    get:
+      tags:
+        - "Student"
+      summary: get all Student
+      operationId: get Student
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+        - name: page Size
+          in: query
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: list of Stundents
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreateStudent'
+        '400':
+          description: bad request
+    post:
+      tags:
+        - "Student"
+      summary: create a new Student
+      operationId: create Student
+      description: create a new
+      requestBody:
+        description: Student to be created
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Student'
+        required: true
+      responses:
+        '200':
+         description: list of Student
+         content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreateStudent'
+        '400':
+          description: bad request
+  /Student/{id}:
+    get:
+      tags:
+        - "Student"
+      summary: get Student with id
+      operationId: get Student
+      parameters:
+        - name: page
+          in: path
+          schema:
+            type: integer
+          required: true
+        - name: page Size
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: list of Stundents
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreateStudent'
+        '400':
+          description: bad request
+    delete:
+      tags:
+        - Student
+      summary: delete some Student
+      operationId: delete Student
+      description: deleted
+      requestBody:
+        description: resource deleted
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Delete'
+        required: true 
+      responses:
+        '200':
+          description: Student is deleted succefull
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                    $ref: '#/components/schemas/DeletedStudent'
+  /cours:
+    get:
+      tags:
+        - Courses
+      summary: get all courses
+      operationId: get courses
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: string
+        - name: page Size
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: list of courses 
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreateCourses'
+    post:
+      tags:
+        - Courses
+      summary: add new courses
+      operationId: add courses
+      requestBody:
+        description: courses to be created
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Courses'
+        required: true
+      responses:
+        '200':
+         description: list of Student
+         content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreateCourses'
+        '400':
+          description: bad request
+
+
+  /cours/{id}:
+    get:
+      tags:
+        - Courses
+      summary: get all courses with id
+      operationId: get id courses
+      parameters:
+        - name: page of courses
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: list of courses with id
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                    $ref: '#/components/schemas/CreateCourses'
+        '400':
+          description: Bad request
+    post:
+      tags:
+        - "Courses"
+      summary: create a new Courses
+      operationId: create Courses
+      description: create a new
+      requestBody:
+        description: Courses to be created
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Courses'
+        required: true
+      responses:
+        '200':
+         description: list of Courses
+         content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreateCourses'
+        '400':
+          description: bad request        
+    delete:
+      tags:
+        - Courses
+      summary: delete some Courses
+      operationId: delete Courses
+      description: deleted
+      requestBody:
+        description: resource deleted
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/DeleteCourses'
+        required: true 
+      responses:
+        '200':
+          description: list of courses is deleted succefull
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                    $ref: '#/components/schemas/CoursesDeleted'
+    
+components:
+  schemas:
+    CreateStudent:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        birthday:
+          type: string
+          format: date
+          example: '2022-01-01'
+      xml:
+        name: CreateStudent
+    Student:
+      type: object
+      properties:
+        name:
+          type: string
+        birthday:
+          type: string
+          format: date
+          example: '2022-01-01'
+      xml:
+        name: Student
+    Courses:
+      type: object
+      properties:
+        name:
+          type: string
+        matier:
+          type: string
+        teacher:
+          type: string
+      xml:
+        name: Courses
+    Delete:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        birthday:
+          type: string
+          format: date
+      xml:
+        name: Delete
+    CoursesDeleted:
+      type: object
+      xml:
+        name: CoursesDeleted
+    CreateCourses:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        matier:
+          type: string
+        teacher:
+          type: string
+      xml:
+        name: CreateCourses
+    DeletedStudent:
+      type: object
+      xml:
+        name: DeletedStudent
+    DeleteCourses:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        matier:
+          type: string
+        teacher:
+          type: string
+      xml:
+        name: DeleteCourses
+
+
+        
+      
